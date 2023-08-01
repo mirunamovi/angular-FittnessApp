@@ -1,0 +1,41 @@
+
+
+.center-card {
+
+    width: 100%; 
+
+    margin:  0 auto; 
+    display: flex;
+
+    border:  solid  black;
+
+   margin-top: 100px;
+
+}
+  .center-card-content {
+    margin: 10px;
+    
+  }
+  
+  .container {
+    width: 100%;
+    display: flex;
+   
+    
+  }
+  
+  .horizontal-line {
+    width: 100%;
+    height: 1px;
+    background-color: black;
+  }
+  
+  .center-card-rezumat {
+    margin: 10px;
+    display: flex-end;
+    justify-content: space-between; 
+    align-items: right;
+    font-weight: bold; 
+    margin-left: auto;  
+}
+  

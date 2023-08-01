@@ -1,0 +1,72 @@
+
+
+fieldset{
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.5rem;
+    min-width: 10rem;
+    max-width: 100%;
+    max-height: 20rem;
+    min-height: 10rem;
+}
+
+/* ::ng-deep .custom-class .mat-form-field-underline {
+    display: none;
+    background-color: aqua;
+  } */
+
+  .custom-form-field {
+    /* Add your custom styles here */
+    width: 300px;
+  }
+  
+  /* Custom styles for the MatSelect dropdown */
+  .custom-select {
+    /* Add your custom styles here */
+    color: #333;
+    font-size: 16px;
+    border: 1px solid black; /* Border with solid black */
+    border-radius: 4px;
+    background-color: white; /* White background */
+  }
+  
+  /* Custom styles for the MatSelect dropdown options */
+  .mat-option {
+    /* Add your custom styles here */
+    background-color: white; /* White background for options */
+    color: #333;
+  }
+  
+  /* Custom styles for the selected MatSelect option */
+  .mat-select-value-text {
+    /* Add your custom styles here */
+    font-weight: bold;
+  }
+
+  .container {
+    display: flex;
+  }
+  
+  .column1 {
+    flex: 0 0 auto;
+    display: flex;
+    max-width: max-content;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+  }
+  
+  .column2 {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between;
+
+
+  }

@@ -1,0 +1,17 @@
+<!-- <p>tab works!</p> -->
+<div class="tab">
+  <mat-tab-group>
+    <ng-container *ngFor="let day of arr; let i = index">
+      <div>
+        <p (click)="onClick(i)">dsad</p>
+        <mat-tab label="{{ day }}">{{ day }}</mat-tab>
+      </div>
+    </ng-container>
+    <!-- <mat-tab label="Marți"> Marți </mat-tab>
+    <mat-tab label="Miercuri"> Miercuri </mat-tab>
+    <mat-tab label="Joi"> Joi </mat-tab>
+    <mat-tab label="Vineri"> Vineri </mat-tab>
+    <mat-tab label="Rezumat"> Rezumat </mat-tab> -->
+  </mat-tab-group>
+</div>
+<app-footer></app-footer>
