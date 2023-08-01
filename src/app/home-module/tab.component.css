@@ -1,8 +1,15 @@
 .tab {
-  margin: auto;
-  margin-top: 20px;
-  width: 50%;
-  height: 300px;
+  width: 100%;
+  height: auto;
   border: solid 4px #77787d;
   padding: 50px;
+}
+
+.dashboard-container{
+  max-width: 1400px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

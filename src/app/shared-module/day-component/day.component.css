@@ -1,13 +1,12 @@
 .center-card {
 
-    width: 70%; 
+    width: 100%; 
     margin:  0 auto; 
     display: flex;
     border:  solid  black;
-    margin-top: 100px;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    /* padding: 2rem; */
+    margin-top: 1rem;
 
 }

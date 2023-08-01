@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TabComponent } from './tab.component';
 import { SharedModule } from '../shared-module/shared.module';
 import { SummaryComponent } from './summary-component/summary.component';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatTabNav, MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';

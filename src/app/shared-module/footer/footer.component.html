@@ -1,5 +1,9 @@
 <!-- <p>footer works!</p> -->
 <div class="footer">
-  <a class="ant-btn"> {{ previousDay }} </a>
-  <a class="post-btn"> {{ nextDay }} </a>
+  <div (click)="onClick(previousDay)">
+    <a class="ant-btn"> {{ previousDay }} </a>
+  </div>
+  <div (click)="onClick(nextDay)"> 
+    <a class="post-btn"> {{ nextDay }} </a>
+  </div>
 </div>

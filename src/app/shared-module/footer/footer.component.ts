@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+
 
 @Component({
   selector: 'app-footer',
@@ -6,6 +8,14 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent {
-  @Input() previousDay = 'Luni';
-  @Input() nextDay = 'Marti';
+  @Input() previousDay = '';
+  @Input() nextDay = '';
+  @Input() arr!:string[];
+  @Output() changeDays = new EventEmitter();
+
+  onClick(value: any){
+    let currentTab = this.arr.indexOf(value);
+    console.log(currentTab)
+    this.changeDays.emit(currentTab);
+  }
 }

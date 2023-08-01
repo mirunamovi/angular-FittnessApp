@@ -1,6 +1,9 @@
 .footer {
   margin: auto;
-  width: 50%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   border: solid 4px #77787d;
   padding: 50px;
   cursor: pointer;
@@ -12,8 +15,6 @@
   text-align: center;
   display: inline-block;
   height: 40px;
-  margin-left: 490px;
-  margin-right: 40px;
   position: relative;
   line-height: 2.5em;
   padding-left: 1em;
@@ -31,8 +32,6 @@
   text-align: center;
   display: inline-block;
   height: 40px;
-  margin-left: 40px;
-  margin-right: 40px;
   position: relative;
   line-height: 2.5em;
   padding-left: 1em;
@@ -61,8 +60,8 @@
   border-bottom: 20px solid transparent;
   border-top: 20px solid transparent;
   height: 0px;
-  width: 0px;
-  margin-right: 69px;
+  width: 150px;
+  margin-right: 80px;
   right: 0;
 }
 

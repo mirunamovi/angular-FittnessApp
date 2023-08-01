@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-tab',
@@ -14,14 +15,26 @@ import { Component } from '@angular/core';
   //   SharedModule,
   // ],
 })
+
 export class TabComponent {
-  previousDay!: string;
-  nextDay!: string;
+  previousDay = 'Vineri';
+  nextDay = 'Marti';
   arr = ['Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Rezumat'];
 
   onClick(value: number) {
-    console.log('dsd');
-    this.previousDay = this.arr[value++];
-    this.nextDay = this.arr[value--];
+    this.previousDay = this.arr[value-1];
+    this.nextDay = this.arr[value+1];
+
+    if(this.arr[value] == 'Rezumat'){
+      this.previousDay = this.arr[value-1];
+      this.nextDay = this.arr[0];
+    }
+
+    if(this.arr[value] == 'Luni'){
+      this.previousDay = this.arr[this.arr.length-1];
+      this.nextDay = this.arr[value+1];
+    }
+    console.log(this.previousDay);
+    console.log(this.nextDay);
   }
 }
