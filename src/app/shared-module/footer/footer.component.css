@@ -7,6 +7,8 @@
   border: solid 4px #77787d;
   padding: 50px;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
 }
 
 .post-btn {
@@ -60,9 +62,7 @@
   border-bottom: 20px solid transparent;
   border-top: 20px solid transparent;
   height: 0px;
-  width: 150px;
-  margin-right: 80px;
-  right: 0;
+  left: -20px;
 }
 
 .post-btn:hover,

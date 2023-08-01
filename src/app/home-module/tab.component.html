@@ -1,18 +1,27 @@
 <!-- <p>tab works!</p> -->
 <div class="dashboard-container">
   <div class="tab">
-      <mat-tab-group (selectedTabChange)="onClick($event.index)" dynamicHeight>
-        <ng-container *ngFor="let day of arr; let i = index">
-            <mat-tab  label="{{ day }}">
-              <div *ngIf="day != 'Rezumat'">
-                <app-day></app-day>
-              </div>
-              <div *ngIf="day == 'Rezumat'">
-                <app-summary></app-summary>
-              </div>
-            </mat-tab>
-        </ng-container>
-      </mat-tab-group>
+    <mat-tab-group
+      [selectedIndex]="selectedDayIndex"
+      (selectedTabChange)="onClick($event.index)"
+      dynamicHeight
+    >
+      <ng-container *ngFor="let day of arr; let i = index">
+        <mat-tab label="{{ day }}">
+          <div *ngIf="day != 'Rezumat'">
+            <app-day></app-day>
+          </div>
+          <div *ngIf="day == 'Rezumat'">
+            <app-summary></app-summary>
+          </div>
+        </mat-tab>
+      </ng-container>
+    </mat-tab-group>
   </div>
-  <app-footer [previousDay]="previousDay" [nextDay]="nextDay" [arr]="arr" (changeDays)="onClick($event)"></app-footer>
+  <app-footer
+    [previousDay]="previousDay"
+    [nextDay]="nextDay"
+    [arr]="arr"
+    (changeDays)="onClick($event)"
+  ></app-footer>
 </div>
