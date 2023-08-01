@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { DaySchedule } from './shared/day-schedule.model';
-import { Activity } from './shared/activity.model';
+import { ActivityModel } from '../interfaces/activity-model';
+import { DaySchedule } from '../interfaces/day-schedule.model';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -42,8 +42,8 @@ export class SchedulerService {
       for (let index = 0; index < 5; index++) {
         this.dailySchedule.push(
           new DaySchedule(
-            new Activity(new Date(0), new Date(0), ''),
-            new Activity(new Date(0), new Date(0), '')
+            new ActivityModel(new Date(0), new Date(0), ''),
+            new ActivityModel(new Date(0), new Date(0), '')
           )
         );
       }

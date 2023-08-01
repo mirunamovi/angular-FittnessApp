@@ -17,8 +17,8 @@ interface Sport {
   selector: 'app-activity',
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.css',],
-  standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatFormFieldModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, NgFor],
+  // standalone: true,
+  // imports: [MatCardModule, MatButtonModule, MatFormFieldModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, NgFor],
 })
 export class ActivityComponent {
   @Input() label!: string;

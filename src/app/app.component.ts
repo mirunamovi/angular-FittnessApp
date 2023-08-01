@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './shared/interfaces/user';
+import { User } from './shared-module/interfaces/user';
 
 @Component({
   selector: 'app-root',

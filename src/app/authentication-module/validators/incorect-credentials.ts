@@ -1,4 +1,4 @@
-import { AuthService } from "src/app/shared/authentication/auth.service";
+import { AuthService } from "src/app/shared-module/authentication/auth.service";
 import { AsyncValidatorFn, AbstractControl, ValidationErrors } from "@angular/forms";
 import {Observable, of, map, take} from 'rxjs'
 
