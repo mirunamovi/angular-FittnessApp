@@ -1,0 +1,35 @@
+<div class="form">
+    <form [formGroup]="loginForm" class="form-container" (ngSubmit)="onSubmit()">
+        <div class="form-header">
+            <p>Welcome back!</p>
+        </div>
+        <div class="user-container">
+            <label for="user">User</label>
+            <input formControlName="user" type="text" name="user" required id="">
+        </div>
+        
+        <div class="password-container">
+            <label for="password">Password</label>
+            <input formControlName="password" type="password" required name="password" id="">
+        </div>
+        <div class="button-container">
+            <div class="button-container">
+                <button>Start Planning!<mat-spinner *ngIf="" style="width: 5%; background-color: gray"></mat-spinner></button>
+            </div>
+        </div>
+        <div *ngIf="submited && userNotExistent && !emailOrPasswordError" class="not-existent-error">
+            <p>User does not exist!</p>
+        </div>
+        <div *ngIf="submited && emailOrPasswordError && !userNotExistent" class="incorect-credentials">
+            <p>User or password incorect!</p>
+        </div>
+        <div *ngIf="!onSucces" class="not-existent-error">
+            <p>Please complete all fields!</p>
+        </div>
+        <!-- <div *ngIf="!onSucces" class="succes-login">
+            <p>Succes login!</p>
+        </div> -->
+    </form>
+</div>
+{{loginForm.controls.password.value | json}}
+{{loginForm.controls.user.value | json}}
