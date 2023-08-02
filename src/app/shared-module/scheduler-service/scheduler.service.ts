@@ -191,6 +191,52 @@ export class SchedulerService {
     return caloriesPerActivity;
   }
 
+  calculateCaloriesPerDay() {
+    const dailyCalories: {
+      // day: string;
+      day: number;
+      morningCal: number;
+      eveningCal: number;
+    }[] = [];
+
+    let i = 0;
+    this.dailySchedule.forEach((day) => {
+      const activityLengthM =
+        (new Date(day.morningActivity.end).getTime() -
+          new Date(day.morningActivity.start).getTime()) /
+        60000;
+      const activityTypeM = day.morningActivity.type;
+
+      const currentActivityM = this.CALORIES_ARRAY.find(
+        (activity) => activity.type === activityTypeM
+      );
+
+      const caloriesSpentM =
+        currentActivityM?.caloriesPerMinute! * activityLengthM;
+
+      const activityLengthE =
+        (new Date(day.eveningActivity.end).getTime() -
+          new Date(day.eveningActivity.start).getTime()) /
+        60000;
+      const activityTypeE = day.eveningActivity.type;
+
+      const currentActivityE = this.CALORIES_ARRAY.find(
+        (activity) => activity.type === activityTypeM
+      );
+
+      const caloriesSpentE =
+        currentActivityE?.caloriesPerMinute! * activityLengthE;
+
+      dailyCalories.push({
+        day: i++,
+        morningCal: caloriesSpentM,
+        eveningCal: caloriesSpentE,
+      });
+    });
+
+    return dailyCalories;
+  }
+
   setDailyScheduleTest() {
     for (let index = 0; index < 5; index++) {
       const start = new Date(0);
