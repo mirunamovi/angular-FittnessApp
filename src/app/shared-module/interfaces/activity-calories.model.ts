@@ -1,3 +1,3 @@
 export class ActivityCalories {
-  constructor(public activity: string, public caloriesPerMinute: number) {}
+  constructor(public type: string, public caloriesPerMinute: number) {}
 }
