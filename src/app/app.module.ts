@@ -11,7 +11,7 @@ import { HomeModule } from './home-module/home.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +19,7 @@ import { HomeModule } from './home-module/home.module';
     AuthenticationModule,
     SharedModule,
     BrowserAnimationsModule,
-    HomeModule
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
