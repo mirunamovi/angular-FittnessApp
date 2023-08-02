@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,51 +9,118 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AuthService {
 
   constructor(private route: Router) { }
+  loading = new Subject<boolean>();
+  userDoesNotExist = new Subject<boolean>();
+  userOrPasswordIncorect = new Subject<boolean>();
 
-  verifyUser(value:string): Promise<boolean>{
-     return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const getUser = JSON.parse(localStorage.getItem('users')!);
-        let checkedUser = getUser.find((user:any) => user.name == value)
-        let notExistent = false;
-        if(!checkedUser){
-          notExistent = true;
-          resolve(notExistent)
-        }
-        resolve(notExistent);
-      }, 1000);
-     }) 
+  // verifyUser(value:string): Promise<boolean>{
+  //    return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       const getUser = JSON.parse(localStorage.getItem('users')!);
+  //       let checkedUser = getUser.find((user:any) => user.name == value)
+  //       let notExistent = false;
+  //       if(!checkedUser){
+  //         notExistent = true;
+  //         resolve(notExistent)
+  //       }
+  //       resolve(notExistent);
+  //     }, 1000);
+  //    }) 
       
-  }
+  // }
 
-  checkUserOrPasswordValidity(value:string, password: string): Promise<boolean>{
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
+  verifyUser(value:string): Observable<boolean>{
+     
+            const getUser = JSON.parse(localStorage.getItem('users')!);
+            let checkedUser = getUser.find((user:any) => user.name == value)
+            let notExistent = false;
+            if(!checkedUser){
+              notExistent = true;
+              return of(notExistent)
+            }
+            return of(notExistent);
+        
+ }
+
+  // checkUserOrPasswordValidity(value:string, password: string): Promise<boolean>{
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       const getUser = JSON.parse(localStorage.getItem('users')!);
+  //       let checkedUser = getUser.find((user:any) => user.name == value)
+  //       let credentialsError = false;
+        
+  //       if(checkedUser?.name !== value || checkedUser?.password !== password){
+  //         credentialsError = true;
+  //         resolve(credentialsError);
+  //       }
+  //       resolve(credentialsError);
+  //     }, 1000);
+  //   }) 
+  // }
+
+  checkUserOrPasswordValidity(value:string, password: string): Observable<boolean>{
+      
         const getUser = JSON.parse(localStorage.getItem('users')!);
         let checkedUser = getUser.find((user:any) => user.name == value)
         let credentialsError = false;
         
         if(checkedUser?.name !== value || checkedUser?.password !== password){
           credentialsError = true;
-          resolve(credentialsError);
+          return of(credentialsError);
         }
-        resolve(credentialsError);
-      }, 1000);
-    }) 
+        return of(credentialsError);
+  
   }
 
-  validForm(areCredentialsInvalid:boolean, notExistentUser: boolean): Promise<boolean>{
+  // // Validate responses from the functions above and return a boolean value
+  // validForm(areCredentialsInvalid:boolean, notExistentUser: boolean): Promise<boolean>{
     
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if(areCredentialsInvalid === false && notExistentUser === false){
+    
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       if(!areCredentialsInvalid && !notExistentUser){
+          
+          
+  //         resolve(true);
+  
+  //       }
+  //       resolve(false);
+  //     }, 3000);
+  //   })
+  // }
 
-          resolve(true);
+  // Validate responses from the functions above and return a boolean value
+  validForm(areCredentialsInvalid:boolean, notExistentUser: boolean): void{
+    
+      
+      this.loading.next(false);
+      this.userOrPasswordIncorect.next(false);
+      this.userDoesNotExist.next(false);
+    
+      setTimeout(() => {
+        if(!areCredentialsInvalid && !notExistentUser){
+          
+          this.loading.next(true);
+          this.route.navigate(['scheduler']);
   
         }
-        resolve(false);
-      }, 1000);
-    })
-  }
 
+        if(notExistentUser){
+          this.loading.next(true);
+          console.log("notExistentUser")
+          this.userDoesNotExist.next(true);
+        }
+
+        if(areCredentialsInvalid){
+          this.loading.next(true);
+          console.log("areCredentialsInvalid")
+          this.userOrPasswordIncorect.next(true);
+        }
+          
+        
+        
+      }, 2000);
+
+  }
+  
 }
