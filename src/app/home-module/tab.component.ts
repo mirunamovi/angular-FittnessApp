@@ -10,7 +10,7 @@ export class TabComponent {
   previousDay = 'Vineri';
   nextDay = 'Marti';
   selectedDayIndex = 0;
-  arr = ['Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Rezumat'];
+  arr = ['Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Rezumat', 'Dashboard'];
 
   onClick(value: number) {
     console.log('Value:', value);
@@ -19,7 +19,7 @@ export class TabComponent {
 
     this.selectedDayIndex = value;
 
-    if (this.arr[value] == 'Rezumat') {
+    if (this.arr[value] === 'Dashboard') {
       this.previousDay = this.arr[value - 1];
       this.nextDay = this.arr[0];
     }
