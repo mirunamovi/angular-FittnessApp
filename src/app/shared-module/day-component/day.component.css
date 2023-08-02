@@ -1,12 +1,16 @@
 .center-card {
-
-    width: 100%; 
+    width: 70%; 
     margin:  0 auto; 
     display: flex;
     border:  solid  black;
+    margin-top: 2rem;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    margin-top: 1rem;
+    padding-bottom: 2rem;
+}
 
+.activity{
+    width: 80%; 
+    margin-top: 1rem;
 }

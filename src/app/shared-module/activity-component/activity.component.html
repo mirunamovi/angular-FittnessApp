@@ -1,87 +1,22 @@
-<!-- <mat-form-field appearance="outline" class="field">
-    <mat-label style="font-size: 1.5rem;">{{ label }}</mat-label>
 
-       <mat-card-header> 
-    
-          <mat-card-title>Actions Buttons</mat-card-title>
-    
-          <mat-card-subtitle>Start</mat-card-subtitle>
-    
-        </mat-card-header>  
-    
-        <mat-card-actions>
-            
-            <h5>Activitate</h5>
-            <mat-form-field>
-              <select matNativeControl required>
-                <option value="Alergare Usoara">Alergare Usoara</option>
-                <option value="Karate">Karate</option>
-                <option value="Tenis">Tenis</option>
-                <option value="Inot">Inot</option>
-                <option value="Inot">Inot</option>
-                <option value="Fotbal">Fotbal</option>
-                <option value="Handbal">Handbal</option>
-                <option value="Volei">Volei</option>
-              </select>
-            </mat-form-field>
-            <h5>De la</h5>
-            <input type="time" name="time"/>
-            <h5>Pana la</h5>
-            <input type="time" name="time"/>
-        </mat-card-actions>
-
-</mat-form-field> -->
-
-<fieldset style="border: solid black">
-                <legend>{{label}}</legend>
-                <!-- <h4> Activitate &nbsp; &nbsp; -->
-                    <!-- <mat-form-field style="min-width: 5rem;" class="custom-class">
-                        <select matNativeControl required>
-                            <option value="Alergare Usoara">Alergare Usoara</option>
-                            <option value="Karate">Karate</option>
-                            <option value="Tenis">Tenis</option>
-                            <option value="Inot">Inot</option>
-                            <option value="Inot">Inot</option>
-                            <option value="Fotbal">Fotbal</option>
-                            <option value="Handbal">Handbal</option>
-                            <option value="Volei">Volei</option>
-                        </select>
-                    </mat-form-field> -->
-                    <!-- <mat-form-field class="custom-form-field">
-                        <mat-label>Select an option</mat-label>
-                        <mat-select class="custom-select">
-                          <mat-option value="option1">Option 1</mat-option>
-                          <mat-option value="option2">Option 2</mat-option>
-                          <mat-option value="option3">Option 3</mat-option>
-                        </mat-select>
-                      </mat-form-field> -->
-                <!-- </h4> -->
-                <form class="container">
-                    <div class="column1">
-                        <label>Activitate &nbsp;</label>
-                        <!-- <br> -->
-                        <label >De la &nbsp;</label>
-                        <!-- <br> -->
-                        <label >Pana la &nbsp;</label>
-                    </div>
-                    <div class="column2">
-                        <select style="width: 8rem; height: 2.5rem">
-                            <option value="Alergare Usoara">Alergare Usoara</option>
-                            <option value="Karate">Karate</option>
-                            <option value="Tenis">Tenis</option>
-                            <option value="Inot">Inot</option>
-                            <option value="Inot">Inot</option>
-                            <option value="Fotbal">Fotbal</option>
-                            <option value="Handbal">Handbal</option>
-                            <option value="Volei">Volei</option>
-                        </select>
-                        <br>
-                        <input type="time" name="time" style="width: 7.7rem; height: 2.2rem; min-width: 4rem;"/>
-                        <br>
-                        <input type="time" name="time" style="width: 7.7rem; height: 2.2rem"/>
-                   </div>
-                </form>
-                <!-- <h4>De la &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input matInput type="time" name="time" style="width: 5rem; height: 2rem"/></h4>
-                <h4>Pana la &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input type="time" name="time" style="width: 5rem; height: 2rem"/></h4> -->
+<fieldset>
+  <legend>{{label}}</legend>
+  <mat-card class="inside">
+      <mat-card-content class="center-card-content">
+          Activitate &nbsp; 
+          <select class="dropdown">
+              <option value="Alergare Usoara">Alergare Usoara</option>
+              <option value="Karate">Karate</option>
+              <option value="Tenis">Tenis</option>
+              <option value="Inot">Inot</option>
+              <option value="Inot">Inot</option>
+              <option value="Fotbal">Fotbal</option>
+              <option value="Handbal">Handbal</option>
+              <option value="Volei">Volei</option>
+          </select>
+      </mat-card-content>   
+      <mat-card-content class="center-card-content">De la &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="time" name="time" class="time"/></mat-card-content>
+      <mat-card-content class="center-card-content">Pana la &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="time" name="time" class="time"/></mat-card-content>
+  </mat-card>
 </fieldset>
 
