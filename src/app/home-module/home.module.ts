@@ -11,11 +11,26 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-
+import { DashComponent } from '../dashboard/dash/dash.component';
+import { BarChartComponent } from '../dashboard/bar-chart/bar-chart.component';
+import { CardComponent } from '../dashboard/card/card.component';
+import { DoughnutChartComponent } from '../dashboard/doughnut-chart/doughnut-chart.component';
+import { LineChartComponent } from '../dashboard/line-chart/line-chart.component';
+import { NgChartsModule } from 'ng2-charts';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
-  declarations: [SummaryComponent, TabComponent],
+  declarations: [
+    SummaryComponent,
+     TabComponent,
+     DashComponent,
+     BarChartComponent,
+     CardComponent,
+     DoughnutChartComponent,
+     LineChartComponent
+    ],
   imports: [
     CommonModule,
     SharedModule,
@@ -28,6 +43,11 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,  
     MatSelectModule, 
     MatInputModule,
+    NgChartsModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule
   ]
 })
 export class HomeModule { }
