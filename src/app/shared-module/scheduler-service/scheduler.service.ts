@@ -10,6 +10,7 @@ import { ActivityCalories } from '../interfaces/activity-calories.model';
 export class SchedulerService {
   // captaincalculator.com
   private CALORIES_ARRAY: ActivityCalories[] = [
+    new ActivityCalories('Alergare usoara', 8),
     new ActivityCalories('Inot', 8),
     new ActivityCalories('Karate', 6),
     new ActivityCalories('Tenis', 9),
