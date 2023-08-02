@@ -96,7 +96,7 @@ export class SchedulerService {
       const values: ActivityModel[] = Object.values(day);
       for (const activity of values) {
         const activityData = this.CALORIES_ARRAY.find(
-          (item) => item.activity === activity.type
+          (item) => item.type === activity.type
         );
 
         if (!activityData) {
@@ -128,11 +128,11 @@ export class SchedulerService {
     return caloriesPerHour;
   }
 
-  calculateActivityTime() {
+  private calculateActivityTime() {
     const timePerActivity: { type: string; time: number }[] = [];
     this.CALORIES_ARRAY.forEach((activity) => {
       timePerActivity.push({
-        type: activity.activity,
+        type: activity.type,
         time: 0,
       });
     });
@@ -165,6 +165,30 @@ export class SchedulerService {
     });
 
     return timePerActivity;
+  }
+
+  calculateActivityCalories() {
+    const caloriesPerActivity: {
+      type: String;
+      time: number;
+      calories: number;
+    }[] = [];
+    const timePerActivity = this.calculateActivityTime();
+
+    timePerActivity.forEach((activity) => {
+      const objectToUpdate = this.CALORIES_ARRAY.find(
+        (obj) => obj.type === activity.type
+      );
+      const calories = objectToUpdate!.caloriesPerMinute * activity.time;
+
+      caloriesPerActivity.push({
+        type: activity.type,
+        time: activity.time,
+        calories: calories,
+      });
+    });
+
+    return caloriesPerActivity;
   }
 
   setDailyScheduleTest() {
