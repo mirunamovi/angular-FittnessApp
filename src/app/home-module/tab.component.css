@@ -3,9 +3,11 @@
   height: auto;
   border: solid 4px #77787d;
   padding: 50px;
+  height: 610px;
+  border-radius: 5px;
 }
 
-.dashboard-container{
+.dashboard-container {
   max-width: 1400px;
   height: 100vh;
   margin: 0 auto;
