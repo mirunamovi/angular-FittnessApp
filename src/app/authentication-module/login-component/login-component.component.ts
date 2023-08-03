@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared-module/authentication/auth.service';
 import { IncorectCredentials } from '../validators/incorect-credentials';
 import { Router } from '@angular/router';
-
+import { ExistUser } from '../validators/exist-user';
 
 @Component({
   selector: 'app-login-component',
@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponentComponent implements OnInit{
   
-  userNotExistent = false;
-  emailOrPasswordError = false;
-  submited = false;
+  notExistentUser!:boolean;
+  emailOrPasswordError!:boolean;
   onSucces = true;
+  notCompleted = false;
   loginForm = new FormGroup({
     user: new FormControl('', [
       Validators.required,
@@ -23,36 +23,36 @@ export class LoginComponentComponent implements OnInit{
     password: new FormControl('', [
       Validators.required
     ])
-  }, null, [IncorectCredentials(this.auth)])
+  }, null, [IncorectCredentials(this.auth), ExistUser(this.auth)])
 
-  constructor(private auth: AuthService, private route: Router){}
+  constructor(private auth: AuthService, private route: Router){
+      this.auth.loading.subscribe((res) => {
+        this.onSucces = res;
+        console.log(this.onSucces)
+      })
+      this.auth.userDoesNotExist.subscribe((res) => {
+        this.notExistentUser = res;
+        console.log(this.notExistentUser)
+      })
+      this.auth.userOrPasswordIncorect.subscribe((res) => {
+        this.emailOrPasswordError = res;
+        console.log(this.emailOrPasswordError)
+      })
+  }
   
 
-  async onSubmit():Promise<void>{
+  onSubmit(): void{
     
     if(this.loginForm.controls.user.valid && this.loginForm.controls.password.valid){
       
-      this.submited = true;
+        this.notCompleted = false;     
+        this.auth.validForm(this.loginForm.hasError('emailOrPasswordError'), this.loginForm.hasError('userNotExistent'));
 
-      try{
-        
-        this.userNotExistent = await this.auth.verifyUser(this.loginForm.controls.user.value!);
-        this.emailOrPasswordError = await this.auth.checkUserOrPasswordValidity(this.loginForm.controls.user.value!,this.loginForm.controls.password.value!)
-        await this.auth.validForm(this.userNotExistent, this.emailOrPasswordError).then((res) => res ? this.route.navigate(['scheduler']) : false)
-
-      }catch(e){
-        console.log(e)
-      }
-      
     }else{
-      this.onSucces = false;
-    }
 
-    setTimeout(() => {
-      this.userNotExistent = false;
-      this.emailOrPasswordError = false;
-      this.onSucces = true;
-    }, 1500);
+        this.notCompleted = true;
+
+    }
     
   }
   
