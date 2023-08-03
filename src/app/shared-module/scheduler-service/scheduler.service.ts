@@ -8,11 +8,7 @@ import { Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class SchedulerService{
-
-
-  
-
+export class SchedulerService {
   private CALORIES_ARRAY: ActivityCalories[] = [
     new ActivityCalories('Alergare Usoara', 8),
     new ActivityCalories('Inot', 8),
@@ -66,7 +62,6 @@ export class SchedulerService{
     }
     this.saveToLocalStorage();
   }
-
 
   getFullSchedule() {
     return this.dailySchedule;
