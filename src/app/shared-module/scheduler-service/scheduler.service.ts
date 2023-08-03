@@ -76,8 +76,8 @@ export class SchedulerService{
     this.dailySchedule[index] = daySchedule;
     this.schedule.next(this.dailySchedule);
 
-    this.saveToLocalStorage();
-    this.fetchFromLocalStorage();
+    // this.saveToLocalStorage();
+    // this.fetchFromLocalStorage();
   }
 
   saveToLocalStorage() {
