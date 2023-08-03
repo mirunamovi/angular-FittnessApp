@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
@@ -17,11 +17,16 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 })
 
 export class TabComponent {
+  @Input() value!: number;
+
+  currentDay = '';
   previousDay = 'Vineri';
   nextDay = 'Marti';
   arr = ['Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Rezumat'];
 
   onClick(value: number) {
+    
+    this.currentDay = this.arr[value];
     this.previousDay = this.arr[value-1];
     this.nextDay = this.arr[value+1];
 
@@ -34,7 +39,8 @@ export class TabComponent {
       this.previousDay = this.arr[this.arr.length-1];
       this.nextDay = this.arr[value+1];
     }
-    console.log(this.previousDay);
-    console.log(this.nextDay);
+    
+
+
   }
 }

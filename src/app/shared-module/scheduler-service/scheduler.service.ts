@@ -3,12 +3,16 @@ import { DaySchedule } from '../interfaces/day-schedule.model';
 import { ActivityModel } from '../interfaces/activity-model';
 import { Subject } from 'rxjs';
 import { ActivityCalories } from '../interfaces/activity-calories.model';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SchedulerService {
-  // captaincalculator.com
+export class SchedulerService{
+
+
+  
+
   private CALORIES_ARRAY: ActivityCalories[] = [
     new ActivityCalories('Inot', 8),
     new ActivityCalories('Karate', 6),
@@ -17,8 +21,10 @@ export class SchedulerService {
     new ActivityCalories('Handbal', 10),
     new ActivityCalories('Volei', 5),
   ];
+
   private dailySchedule: DaySchedule[] = [];
   schedule = new Subject<DaySchedule[]>();
+  subscription: Subscription = new Subscription();
 
   constructor() {
     if (!this.fetchFromLocalStorage()) {
@@ -31,9 +37,35 @@ export class SchedulerService {
     this.schedule.next(this.dailySchedule);
   }
 
-  getScheduleByDay(index: number) {
+  getScheduleByIndex(index: number): DaySchedule {
     return this.dailySchedule[index];
   }
+
+  updateActivityByIndex(index: number, type: string, activity: string): void {
+    const daySchedule = this.getScheduleByIndex(index);
+    if (type === 'morning') {
+      daySchedule.morningActivity.type = activity;
+    } else {
+      daySchedule.eveningActivity.type = activity;
+    }
+    this.saveToLocalStorage();
+  }
+
+  updateTimeByIndex(index: number, type: string, time: string): void {
+    const daySchedule = this.getScheduleByIndex(index);
+    const hours = parseInt(time.split(':')[0]);
+    const minutes = parseInt(time.split(':')[1]);
+    const timeInDate = new Date(0);
+    timeInDate.setHours(hours, minutes);
+
+    if (type === 'morning') {
+      daySchedule.morningActivity.start = timeInDate;
+    } else {
+      daySchedule.eveningActivity.end = timeInDate;
+    }
+    this.saveToLocalStorage();
+  }
+
 
   getFullSchedule() {
     return this.dailySchedule;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 
 
@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
 
 })
 export class DayComponent {
+  @Input() day = '';
+  @Input() index!: number;
 
 }
 

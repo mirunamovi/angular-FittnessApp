@@ -1,12 +1,5 @@
-import { Component, Input } from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select';
-import {MatInputModule} from '@angular/material/input';
-import {NgFor} from '@angular/common';
-
+import { Component, Input, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
+import { SchedulerService } from '../scheduler-service/scheduler.service'; 
 
 interface Sport {
   value: string;
@@ -17,12 +10,23 @@ interface Sport {
   selector: 'app-activity',
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.css',],
-  // standalone: true,
-  // imports: [MatCardModule, MatButtonModule, MatFormFieldModule, FormsModule, MatFormFieldModule, MatSelectModule, MatInputModule, NgFor],
 })
-export class ActivityComponent {
-  @Input() label!: string;
+export class ActivityComponent implements OnInit{
+  // @Input() label!: string;
+  // @Input() day = '';
 
+  // @Output() input1 = new EventEmitter<string>();
+  // @Output() input2= new EventEmitter<Date>();
+  // @Output() input3= new EventEmitter<Date>();
+
+  constructor(private schedulerService : SchedulerService){
+  }
+  
+  ngOnInit(): void{
+    // console.log(this.currentDay);
+
+  }
+ 
   sports: Sport[] = [
     {value: 'Alergare Usoara', viewValue: 'Alergare Usoara'},
     {value: 'Karate', viewValue: 'Karate'},
@@ -34,7 +38,23 @@ export class ActivityComponent {
 
   ];
 
+  @Input() label!: string;
+  @Input() index!: number; 
 
 
+  onActivityChange(event: any, label: string) {
+    const selectedActivity = event.target.value;
+    this.schedulerService.updateActivityByIndex(this.index, label, selectedActivity);
+  }
 
+  onStartTimeChange(event: any, label: string) {
+    const startTime = event.target.value;
+    this.schedulerService.updateTimeByIndex(this.index, label, startTime);
+  }
+
+  onEndTimeChange(event: any, label: string) {
+    const endTime = event.target.value;
+    this.schedulerService.updateTimeByIndex(this.index, label, endTime);
+  }
 }
+
