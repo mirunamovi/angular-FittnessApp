@@ -7,7 +7,7 @@ export const ExistUser = (userAuth:AuthService) => (control: AbstractControl): O
     const {user} = control.value;
 
     return userAuth.verifyUser(user).pipe(
-        delay(1000),
+        delay(200),
         map((data) => {
             console.log(data)
             return data ? {userNotExistent: true} : null;

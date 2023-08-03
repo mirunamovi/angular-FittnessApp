@@ -9,7 +9,7 @@ export const IncorectCredentials = (userAuth: AuthService) => (control: Abstract
         console.log(password)
 
         return userAuth.checkUserOrPasswordValidity(user, password).pipe(
-                delay(1000),
+                delay(200),
                 map((res) => {
                         console.log(res)
                         return res ? {emailOrPasswordError: true} : null; 
