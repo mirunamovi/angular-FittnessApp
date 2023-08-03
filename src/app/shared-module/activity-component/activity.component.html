@@ -5,7 +5,7 @@
     <mat-card-content class="center-card-content">
       Activitate &nbsp;
 
-      <select class="dropdown" (change)="onActivityChange($event, label)">
+      <select class="dropdown" (change)="onActivityChange()" #type>
         <option value="Alergare Usoara">Alergare Usoara</option>
 
         <option value="Karate">Karate</option>
@@ -22,20 +22,10 @@
       </select>
     </mat-card-content>
 
-    <mat-card-content class="center-card-content"
-      >De la &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input
-        type="time"
-        name="time"
-        class="time"
-        (change)="onStartTimeChange($event, label)"
-    /></mat-card-content>
+    <mat-card-content class="center-card-content">De la &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input
+        type="time" name="time" class="time" (change)="onActivityChange()" #start /></mat-card-content>
 
-    <mat-card-content class="center-card-content"
-      >Pana la &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input
-        type="time"
-        name="time"
-        class="time"
-        (change)="onEndTimeChange($event, label)"
-    /></mat-card-content>
+    <mat-card-content class="center-card-content">Pana la &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<input type="time" name="time"
+        class="time" (change)="onActivityChange()" #end /></mat-card-content>
   </mat-card>
 </fieldset>

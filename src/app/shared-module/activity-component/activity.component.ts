@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
-import { SchedulerService } from '../scheduler-service/scheduler.service'; 
+import { SchedulerService } from '../scheduler-service/scheduler.service';
+import { ActivityModel } from '../interfaces/activity-model';
 
 interface Sport {
   value: string;
@@ -11,50 +12,43 @@ interface Sport {
   templateUrl: './activity.component.html',
   styleUrls: ['./activity.component.css',],
 })
-export class ActivityComponent implements OnInit{
-  // @Input() label!: string;
-  // @Input() day = '';
+export class ActivityComponent implements OnInit {
 
-  // @Output() input1 = new EventEmitter<string>();
-  // @Output() input2= new EventEmitter<Date>();
-  // @Output() input3= new EventEmitter<Date>();
 
-  constructor(private schedulerService : SchedulerService){
+  constructor(private schedulerService: SchedulerService) {
   }
-  
-  ngOnInit(): void{
-    // console.log(this.currentDay);
+
+  ngOnInit(): void {
+
 
   }
- 
+
   sports: Sport[] = [
-    {value: 'Alergare Usoara', viewValue: 'Alergare Usoara'},
-    {value: 'Karate', viewValue: 'Karate'},
-    {value: 'Tenis', viewValue: 'Tenis'},
-    {value: 'Inot', viewValue: 'Inot'},
-    {value: 'Fotbal', viewValue: 'Fotbal'},
-    {value: 'Handbal', viewValue: 'Handbal'},
-    {value: 'Volei', viewValue: 'Volei'}
+    { value: 'Alergare Usoara', viewValue: 'Alergare Usoara' },
+    { value: 'Karate', viewValue: 'Karate' },
+    { value: 'Tenis', viewValue: 'Tenis' },
+    { value: 'Inot', viewValue: 'Inot' },
+    { value: 'Fotbal', viewValue: 'Fotbal' },
+    { value: 'Handbal', viewValue: 'Handbal' },
+    { value: 'Volei', viewValue: 'Volei' }
 
   ];
 
   @Input() label!: string;
-  @Input() index!: number; 
+  @Input() index!: number;
+  type: string = '';
+  start: Date = new Date(0);
+  end: Date = new Date(0);
 
+  activity = new ActivityModel();
 
-  onActivityChange(event: any, label: string) {
-    const selectedActivity = event.target.value;
-    this.schedulerService.updateActivityByIndex(this.index, label, selectedActivity);
+  onActivityChange() {
+    this.activity.type = this.type;
+    this.activity.start = this.start;
+    this.activity.end = this.end;
+
+    this.schedulerService.updateActivity(this.index, this.label === 'Dimineata' ? 0 : 1, this.activity);
   }
 
-  onStartTimeChange(event: any, label: string) {
-    const startTime = event.target.value;
-    this.schedulerService.updateTimeByIndex(this.index, label, startTime);
-  }
-
-  onEndTimeChange(event: any, label: string) {
-    const endTime = event.target.value;
-    this.schedulerService.updateTimeByIndex(this.index, label, endTime);
-  }
 }
 

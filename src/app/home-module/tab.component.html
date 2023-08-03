@@ -9,7 +9,7 @@
       <ng-container *ngFor="let day of arr; let i = index">
         <mat-tab label="{{ day }}">
           <div *ngIf="(day !== 'Rezumat') && (day !== 'Dashboard')">
-            <app-day></app-day>
+            <app-day [index]="i"></app-day>
           </div>
           <div *ngIf="day == 'Rezumat'">
             <app-summary></app-summary>
