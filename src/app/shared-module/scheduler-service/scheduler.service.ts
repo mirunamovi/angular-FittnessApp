@@ -80,6 +80,20 @@ export class SchedulerService{
     // this.fetchFromLocalStorage();
   }
 
+  updateActivity(
+    dayIndex: number,
+    dayPeriod: number,
+    data: { type: string; start: Date; end: Date }
+  ) {
+    if (dayPeriod === 0) {
+      this.dailySchedule[dayIndex].morningActivity.type = data.type;
+      this.dailySchedule[dayIndex].morningActivity.start = data.start;
+      this.dailySchedule[dayIndex].morningActivity.end = data.end;
+    }
+
+    this.schedule.next(this.dailySchedule);
+  }
+
   saveToLocalStorage() {
     localStorage.setItem('dailySchedule', JSON.stringify(this.dailySchedule));
     console.log(JSON.stringify(this.dailySchedule));
