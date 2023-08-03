@@ -70,6 +70,11 @@ export class SchedulerService {
       this.dailySchedule[dayIndex].morningActivity.start = data.start;
       this.dailySchedule[dayIndex].morningActivity.end = data.end;
     }
+    else{
+      this.dailySchedule[dayIndex].eveningActivity.type = data.type;
+      this.dailySchedule[dayIndex].eveningActivity.start = data.start;
+      this.dailySchedule[dayIndex].eveningActivity.end = data.end;
+    }
 
     this.schedule.next(this.dailySchedule);
   }
