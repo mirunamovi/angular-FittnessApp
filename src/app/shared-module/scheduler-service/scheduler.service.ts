@@ -48,21 +48,6 @@ export class SchedulerService {
     this.saveToLocalStorage();
   }
 
-  updateTimeByIndex(index: number, type: string, time: string): void {
-    const daySchedule = this.getScheduleByIndex(index);
-    const hours = parseInt(time.split(':')[0]);
-    const minutes = parseInt(time.split(':')[1]);
-    const timeInDate = new Date(0);
-    timeInDate.setHours(hours, minutes);
-
-    if (type === 'morning') {
-      daySchedule.morningActivity.start = timeInDate;
-    } else {
-      daySchedule.eveningActivity.end = timeInDate;
-    }
-    this.saveToLocalStorage();
-  }
-
   getFullSchedule() {
     return this.dailySchedule;
   }
