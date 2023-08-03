@@ -14,6 +14,7 @@ export class SchedulerService{
   
 
   private CALORIES_ARRAY: ActivityCalories[] = [
+    new ActivityCalories('Alergare Usoara', 8),
     new ActivityCalories('Inot', 8),
     new ActivityCalories('Karate', 6),
     new ActivityCalories('Tenis', 9),
@@ -74,6 +75,9 @@ export class SchedulerService{
   setDaySchedule(daySchedule: DaySchedule, index: number) {
     this.dailySchedule[index] = daySchedule;
     this.schedule.next(this.dailySchedule);
+
+    this.saveToLocalStorage();
+    this.fetchFromLocalStorage();
   }
 
   saveToLocalStorage() {
@@ -92,6 +96,30 @@ export class SchedulerService{
     return false;
   }
 
+  private calculateActivityMinutesPerHour(
+    hour: number,
+    startHour: number,
+    endHour: number,
+    activityStart: Date,
+    activityEnd: Date
+  ) {
+    let minutesInThisHour = 0;
+
+    if (startHour === endHour) {
+      minutesInThisHour = activityEnd.getMinutes() - activityStart.getMinutes();
+    } else {
+      if (hour === startHour) {
+        minutesInThisHour = 60 - activityStart.getMinutes();
+      }
+
+      if (hour === endHour) {
+        minutesInThisHour = activityEnd.getMinutes();
+      }
+    }
+
+    return minutesInThisHour;
+  }
+
   calculateCaloriesPerHour() {
     const caloriesPerHour: number[] = new Array(24).fill(0);
 
@@ -100,10 +128,8 @@ export class SchedulerService{
       const values: ActivityModel[] = Object.values(day);
       for (const activity of values) {
         const activityData = this.CALORIES_ARRAY.find(
-          (item) => item.activity === activity.type
+          (item) => item.type === activity.type
         );
-        console.log(activityData?.activity);
-        console.log(typeof activity.start);
 
         if (!activityData) {
           throw new Error('Calories per minute not found for activity');
@@ -115,18 +141,15 @@ export class SchedulerService{
         const startHour = activityStart.getHours();
         const endHour = activityEnd.getHours();
 
+        // Calculate calories spent per hour
         for (let hour = startHour; hour <= endHour; hour++) {
-          let minutesInThisHour = 60;
-
-          if (hour === startHour) {
-            const minutesInStartHour = 60 - activityStart.getMinutes();
-            minutesInThisHour = Math.min(minutesInStartHour, minutesInThisHour);
-          }
-
-          if (hour === endHour) {
-            const minutesInEndHour = activityEnd.getMinutes();
-            minutesInThisHour = Math.min(minutesInEndHour, minutesInThisHour);
-          }
+          let minutesInThisHour = this.calculateActivityMinutesPerHour(
+            hour,
+            startHour,
+            endHour,
+            activityStart,
+            activityEnd
+          );
 
           const caloriesInThisHour = minutesInThisHour * caloriesPerMinute;
           caloriesPerHour[hour] += caloriesInThisHour;
@@ -135,6 +158,115 @@ export class SchedulerService{
     });
 
     return caloriesPerHour;
+  }
+
+  private calculateActivityTime() {
+    const timePerActivity: { type: string; time: number }[] = [];
+    this.CALORIES_ARRAY.forEach((activity) => {
+      timePerActivity.push({
+        type: activity.type,
+        time: 0,
+      });
+    });
+
+    timePerActivity.forEach((activity) => {
+      this.dailySchedule.forEach((day) => {
+        const values: ActivityModel[] = Object.values(day);
+        for (const checkedActivity of values) {
+          if (checkedActivity.type === activity.type) {
+            const activityStart = new Date(checkedActivity.start);
+            const activityEnd = new Date(checkedActivity.end);
+            const startHour = activityStart.getHours();
+            const endHour = activityEnd.getHours();
+
+            // Calculate calories spent per hour
+            for (let hour = startHour; hour <= endHour; hour++) {
+              let minutesInThisHour = this.calculateActivityMinutesPerHour(
+                hour,
+                startHour,
+                endHour,
+                activityStart,
+                activityEnd
+              );
+
+              activity.time += minutesInThisHour;
+            }
+          }
+        }
+      });
+    });
+
+    return timePerActivity;
+  }
+
+  calculateActivityCalories() {
+    const caloriesPerActivity: {
+      type: String;
+      time: number;
+      calories: number;
+    }[] = [];
+    const timePerActivity = this.calculateActivityTime();
+
+    timePerActivity.forEach((activity) => {
+      const objectToUpdate = this.CALORIES_ARRAY.find(
+        (obj) => obj.type === activity.type
+      );
+      const calories = objectToUpdate!.caloriesPerMinute * activity.time;
+
+      caloriesPerActivity.push({
+        type: activity.type,
+        time: activity.time,
+        calories: calories,
+      });
+    });
+
+    return caloriesPerActivity;
+  }
+
+  calculateCaloriesPerDay() {
+    const dailyCalories: {
+      // day: string;
+      day: number;
+      morningCal: number;
+      eveningCal: number;
+    }[] = [];
+
+    let i = 0;
+    this.dailySchedule.forEach((day) => {
+      const activityLengthM =
+        (new Date(day.morningActivity.end).getTime() -
+          new Date(day.morningActivity.start).getTime()) /
+        60000;
+      const activityTypeM = day.morningActivity.type;
+
+      const currentActivityM = this.CALORIES_ARRAY.find(
+        (activity) => activity.type === activityTypeM
+      );
+
+      const caloriesSpentM =
+        currentActivityM?.caloriesPerMinute! * activityLengthM;
+
+      const activityLengthE =
+        (new Date(day.eveningActivity.end).getTime() -
+          new Date(day.eveningActivity.start).getTime()) /
+        60000;
+      const activityTypeE = day.eveningActivity.type;
+
+      const currentActivityE = this.CALORIES_ARRAY.find(
+        (activity) => activity.type === activityTypeM
+      );
+
+      const caloriesSpentE =
+        currentActivityE?.caloriesPerMinute! * activityLengthE;
+
+      dailyCalories.push({
+        day: i++,
+        morningCal: caloriesSpentM,
+        eveningCal: caloriesSpentE,
+      });
+    });
+
+    return dailyCalories;
   }
 
   setDailyScheduleTest() {
