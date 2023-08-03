@@ -15,7 +15,7 @@ export class BarChartComponent implements OnChanges{
   public barChartPlugins = [];
 
   public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['Luni','Marti','Miercuri','Joi','Vineri','Sambata','Duminica'],
+    labels: ['Luni','Marti','Miercuri','Joi','Vineri'],
     datasets: []
   };
 
@@ -29,25 +29,25 @@ export class BarChartComponent implements OnChanges{
   ngOnChanges() {
     if (this.typeChart === 'kcal') {
       this.barChartData.datasets.push({
-        data: this.caloriiPerZi.map(ziuaData => ziuaData.kcalDim + ziuaData.kcalS),
+        data: this.caloriiPerZi.map(ziuaData => ziuaData.morningCal + ziuaData.eveningCal),
         label: 'KCal Arse pe Zi',
         backgroundColor: 'rgba(255, 99, 132, 0.5)'
       });
     } else if (this.typeChart === 'kcalDimS') {
       this.barChartData.datasets.push({
-        data: this.caloriiPerZi.map(ziuaData => ziuaData.kcalDim),
+        data: this.caloriiPerZi.map(ziuaData => ziuaData.morningCal),
         label: 'KCal Dimineata',
         backgroundColor: 'rgba(255, 99, 132, 0.5)'
       });
 
       this.barChartData.datasets.push({
-        data: this.caloriiPerZi.map(ziuaData => ziuaData.kcalS),
+        data: this.caloriiPerZi.map(ziuaData => ziuaData.eveningCal),
         label: 'KCal Seara',
         backgroundColor: 'rgba(54, 162, 235, 0.5)'
       });
     }
-    // console.log('Labels:', this.barChartData.labels);
-    // console.log('Datasets:', this.barChartData.datasets);
+//     console.log('Datasets:', this.barChartData.datasets);
+//     console.log('date:', this.caloriiPerZi);
 
     this.barChartData.datasets[0].label = this.typeChart === 'kcal' ? 'KCal Arse pe Zi' : 'KCal Dimineata';
   }

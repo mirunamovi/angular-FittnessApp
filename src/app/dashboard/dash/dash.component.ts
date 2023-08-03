@@ -18,16 +18,16 @@ export class DashComponent implements OnInit{
     map(({ matches }) => {
       if (matches) {
         return {
-          columns: 1,
-          chart: { cols: 1, rows: 2 },
-          table: { cols: 1, rows: 4 },
+          columns: 2,
+          chart: { cols: 2, rows: 2 },
+          table: { cols: 2, rows: 2 },
         };
       }
  
      return {
-        columns: 4,
-        chart: { cols: 2, rows: 2 },
-        table: { cols: 4, rows: 2 },
+        columns: 2,
+        chart: { cols: 1, rows: 2 },
+        table: { cols: 2, rows: 2 },
       };
     })
   );
@@ -37,7 +37,7 @@ export class DashComponent implements OnInit{
   ngOnInit() {
     this.schedulerService.setDailyScheduleTest();
     this.caloriiPerOra = this.schedulerService.calculateCaloriesPerHour();
-     //this.activitati = this.schedulerService.calculateActivityCalories();
-    // this.caloriiPerZi = this.schedulerService.calculateCaloriesPerDay();
+    this.activitati = this.schedulerService.calculateActivityCalories();
+    this.caloriiPerZi = this.schedulerService.calculateCaloriesPerDay();
   }
 }

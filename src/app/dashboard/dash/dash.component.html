@@ -22,7 +22,7 @@
       <mat-grid-tile 
       [colspan]="( cardLayout | async )?.chart?.cols" 
       [rowspan]="( cardLayout | async )?.chart?.rows">
-        <app-card title="Ponderea Sportului">
+        <app-card title="Ponderea Sportului (KCal)">
           <div>
             <app-doughnut-chart [activitati]="activitati" chartType="kcal"></app-doughnut-chart>
           </div>
@@ -31,7 +31,7 @@
       <mat-grid-tile 
       [colspan]="( cardLayout | async )?.chart?.cols" 
       [rowspan]="( cardLayout | async )?.chart?.rows">
-        <app-card title="Ponderea Sportului">
+        <app-card title="Ponderea Sportului (Minute)">
           <div>
             <app-doughnut-chart [activitati]="activitati" chartType="ore"></app-doughnut-chart>
           </div>
@@ -40,7 +40,7 @@
       <mat-grid-tile 
       [colspan]="( cardLayout | async )?.table?.cols" 
       [rowspan]="( cardLayout | async )?.table?.rows">
-        <app-card title="KCal-Saptamana">
+        <app-card title="Timp Antrenament">
           <div>
             <app-line-chart [caloriiPerOra]="caloriiPerOra"></app-line-chart>
           </div>
