@@ -34,20 +34,10 @@ fieldset {
   box-shadow: none;
 }
 
-.dropdown {
+.input {
   width: 8.2rem;
 
   height: 2.5rem;
-
-  border-radius: 0.3rem;
-}
-
-.time {
-  width: 7.7rem;
-
-  height: 2.2rem;
-
-  min-width: 4rem;
 
   border-radius: 0.3rem;
 }

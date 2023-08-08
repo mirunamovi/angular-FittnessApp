@@ -13,22 +13,6 @@ export class AuthService {
   userDoesNotExist = new Subject<boolean>();
   userOrPasswordIncorect = new Subject<boolean>();
 
-  // verifyUser(value:string): Promise<boolean>{
-  //    return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       const getUser = JSON.parse(localStorage.getItem('users')!);
-  //       let checkedUser = getUser.find((user:any) => user.name == value)
-  //       let notExistent = false;
-  //       if(!checkedUser){
-  //         notExistent = true;
-  //         resolve(notExistent)
-  //       }
-  //       resolve(notExistent);
-  //     }, 1000);
-  //    }) 
-      
-  // }
-
   verifyUser(value:string): Observable<boolean>{
      
             const getUser = JSON.parse(localStorage.getItem('users')!);
@@ -41,22 +25,6 @@ export class AuthService {
             return of(notExistent);
         
  }
-
-  // checkUserOrPasswordValidity(value:string, password: string): Promise<boolean>{
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       const getUser = JSON.parse(localStorage.getItem('users')!);
-  //       let checkedUser = getUser.find((user:any) => user.name == value)
-  //       let credentialsError = false;
-        
-  //       if(checkedUser?.name !== value || checkedUser?.password !== password){
-  //         credentialsError = true;
-  //         resolve(credentialsError);
-  //       }
-  //       resolve(credentialsError);
-  //     }, 1000);
-  //   }) 
-  // }
 
   checkUserOrPasswordValidity(value:string, password: string): Observable<boolean>{
       
@@ -72,24 +40,6 @@ export class AuthService {
   
   }
 
-  // // Validate responses from the functions above and return a boolean value
-  // validForm(areCredentialsInvalid:boolean, notExistentUser: boolean): Promise<boolean>{
-    
-    
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       if(!areCredentialsInvalid && !notExistentUser){
-          
-          
-  //         resolve(true);
-  
-  //       }
-  //       resolve(false);
-  //     }, 3000);
-  //   })
-  // }
-
-  // Validate responses from the functions above and return a boolean value
   validForm(areCredentialsInvalid:boolean, notExistentUser: boolean): void{
     
       
